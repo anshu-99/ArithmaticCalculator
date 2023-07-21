@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arithmatic Calculator</title>
+  <link rel="icon" href="./icon-calculator-.png" type="image/icon type">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+    }
+    .calculator {
+      max-width: 30%;
+      margin: 50px auto;
+      background-color: #e6b3b3;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    #display {
+      width: 90%;
+      padding: 10px;
+      font-size: 24px;
+      text-align: right;
+      border: none;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      margin-bottom: 20px;
+    }
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px; /* Reduced the grid gap */
+    }
+    .calculator-btn {
+      width: 70%;
+      padding: 15px;
+      font-size: 18px; /* Slightly smaller font size */
+      text-align: center;
+      border: 1px solid #393636;
+      border-radius: 5px;
+      background-color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin: 2px;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+    .calculator-btn:hover {
+      background-color: #e7e4e4;
+    }
+    .calculator-btn:active {
+      background-color: #e7e7e7;
+    }
+    .calculator-btn.double {
+      grid-column: span 2;
+    }
+    .calculator-btn.clear {
+      background-color: #f58c7a;
+      color: #fff;
+    }
+    .calculator-btn.clear:hover {
+      background-color: #f26d4a;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+    <div class="calculator-grid">
+      <div class="calculator-btn clear" onclick="clearDisplay()">C</div>
+      <div class="calculator-btn" onclick="clearEntry()">CE</div>
+      <div class="calculator-btn" onclick="append('%')">%</div>
+      <div class="calculator-btn" onclick="square()">x^2</div> <!-- Added a square function -->
+      <div class="calculator-btn" onclick="calculateSquareRoot()">√</div>
+      <div class="calculator-btn" onclick="append('7')">7</div>
+      <div class="calculator-btn" onclick="append('8')">8</div>
+      <div class="calculator-btn" onclick="append('9')">9</div>
+      <div class="calculator-btn" onclick="append('/')">÷</div>
+      <div class="calculator-btn" onclick="append('4')">4</div>
+      <div class="calculator-btn" onclick="append('5')">5</div>
+      <div class="calculator-btn" onclick="append('6')">6</div>
+      <div class="calculator-btn" onclick="append('*')">×</div>
+      <div class="calculator-btn" onclick="append('1')">1</div>
+      <div class="calculator-btn" onclick="append('2')">2</div>
+      <div class="calculator-btn" onclick="append('3')">3</div>
+      <div class="calculator-btn" onclick="append('-')">-</div>
+      <div class="calculator-btn" onclick="append('0')">0</div>
+      <div class="calculator-btn" onclick="append('.')">.</div>
+      <div class="calculator-btn double" onclick="calculate()">=</div>
+      <div class="calculator-btn" onclick="append('+')">+</div>
+    </div>
+  </div>
+
+  <script>
+    function append(value) {
+      document.getElementById('display').value += value;
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    function clearEntry() {
+      var displayValue = document.getElementById('display').value;
+      document.getElementById('display').value = displayValue.slice(0, -1);
+    }
+
+    function calculate() {
+      var expression = document.getElementById('display').value;
+      try {
+        var result = eval(expression);
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+
+    function calculateSquareRoot() {
+      var expression = document.getElementById('display').value;
+      try {
+        var result = Math.sqrt(eval(expression));
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+    function square() {
+      var expression = document.getElementById('display').value;
+      try {
+        var result = eval(expression);
+        result = result * result; // Squaring the value
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
